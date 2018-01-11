@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+        input, label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="user-form">
+        <label>Enter user ID</label>
+        <input type="number" id="user-id" autofocus min="20" max="200">
+        <label>Enter your name</label>
+        <input type="text" name="username" id="username" placeholder="Enter your name here">
+        <label>Enter your email Id</label>
+        <input type="email" name="user-email" id="user-email" placeholder="Enter your email id">
+        <label>Body text</label>
+        <input type="text" id="post-body" placeholder="Enter body text here">
+        <input type="submit" value="Submit">
+    </form>
+    <ul></ul>
+    <script>
+        var BASE_URL = 'https://jsonplaceholder.typicode.com/';
+        $('#user-form').on('submit', newPost);
+
+        function newPost(event) {
+          //console.log('newPost called');
+          event.preventDefault();
+          var payload;
+
+          payload = {
+            id: $('#user-id').val(),
+            name: $('#username').val(),
+            email: $('#user-email').val(),
+            body: $('#post-body').val()
+          };
+
+          var promise = $.post(BASE_URL + 'posts', payload);
+            
+          promise.then(function(res) {
+            // resolved
+            console.log('newPost success', res);
+            var userInfo = '<li>';
+            for (var field in payload) {
+                userInfo += field + ' : ' + payload[field] + ' | ';
+            }
+            userInfo += '</li>';
+            $('ul').append(userInfo);
+            $('#user-form')[0].reset();
+
+          }, function(err) {
+            // reject
+            console.log('newPost failure', err);
+          });
+        }
+    </script>
+</body>
+</html>

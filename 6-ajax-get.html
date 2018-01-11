@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <h2>Ajax</h2>
+    <hr>
+    <div id="users">
+        <h3>Users <button>FETCH</button></h3>
+        <ul></ul>
+    </div>
+    <hr>
+    <div id="posts">
+        <h3>Posts <button>FETCH</button></h3>
+        <ul></ul>
+    </div>
+    <button id="try-post">Try Post</button>
+    <script>
+
+        var BASE_URL = 'https://jsonplaceholder.typicode.com/';
+
+        $('#users button').on('click', fetchUsers);
+        $('#posts button').on('click', fetchPosts);
+        
+        //show posts lists
+        function fetchUsers() {
+          console.log('fetchUsers called');
+          var item;
+
+          var promise = $.get(BASE_URL + 'users');
+
+          promise.then(function(res) {
+            console.log('users success', res);
+            for (var i = 0; i < res.length; i++) {
+                item = '<li> name: ' + res[i].name + ' | username: ' + res[i].username + '</li>';              
+                $('#users ul').append(item);
+            }
+
+            // list the user as <li> elemnt in the ul.
+          }, function(err) {
+            console.log('users failure', err);
+          });
+        }
+
+        //show posts lists
+        function fetchPosts() {
+          console.log('fetchPosts called');
+          var item;
+
+          var promise = $.get(BASE_URL + 'posts');
+
+          promise.then(function(res) {
+            console.log('fetchPosts success', res);
+            for (var i = 0; i < res.length; i++) {
+                item = '<li> userId: ' + res[i].userId + ' | id: ' + res[i].id + ' | title: ' + res[i].title + '.</li>';
+                console.log(item);
+                $('#posts ul').append(item);
+            }
+          }, function(err) {
+            console.log('fetchPosts failure', err);
+          });
+        }
+    </script>   
+</body>
+</html>
