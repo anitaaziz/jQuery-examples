@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+        .bg-color {
+            background-color: #0000ff;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Helo World</h2>
+    <p>lorem epsum dolar john doe</p>
+
+    <script>
+        $('h2').on('mouseover', toggleClass);
+        $('h2').on('mouseleave', toggleClass);
+        
+        $('p').on('mouseover', toggleClass);
+        $('p').on('mouseleave', toggleClass);
+
+        function toggleClass() {
+           $(this).toggleClass('bg-color');
+        }
+        
+    </script>   
+</body>
+</html>

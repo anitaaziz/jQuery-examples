@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <form id="data-form">
+        <input type="text" name="name" id="student-name" placeholder="Enter your name here" autofocus> 
+        <br><br>
+        <input type="text" name="age" id="student-age" placeholder="Enter your age here">
+        <br><br>
+        <input type="text" name="desig" id="student-desig" placeholder="Enter your designation here.">
+        <br><br>
+    </form>
+    <br>
+    <button id="data-submit">Add</button>
+    <br>
+    <ul id="data-list">
+        <li>lorem</li>
+    </ul>
+
+    <script>
+
+        $('#data-submit').on('click', addData);
+
+        function addData (event) {
+            var data, dataItem;
+
+            //get input values.
+            data = {
+                name:  $('#student-name').val(),    
+                age: $('#student-age').val(),
+                designation: $('#student-desig').val()   
+            };
+            
+            //build a node.
+            //dataItem = '<li> name: ' + data.name  + ' | age: ' + data.age + ' | designation: ' + data.designation + ' | </li>'
+
+            dataItem = '<li>';
+            for (var field in data) {
+                dataItem +=  field + ': ' + data[field]  + ' |'; // data['name'] // data.name
+            }
+
+            dataItem += '</li>';
+             
+            $('#data-list').append(dataItem);
+
+            // clear the form
+            //$('#data-form-reset').click();
+            $('#data-form')[0].reset();
+        }
+
+    </script>
+</body>
+</html>

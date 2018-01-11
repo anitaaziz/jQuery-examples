@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        label, input {
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HTML5 form validation, required, type, maxlength, minlength, (numbers > max, min) -->
+    <form id="data-form">
+        <label>Enter your name</label>
+        
+        <input type="text" name="name" id="faculty-name" placeholder="Enter your name here" value="foo" required> 
+        
+        <label>Enter your age</label>
+        <input type="number" name="age" id="faculty-age" required min="18" max="75">
+        
+        <label>Enter your date of joining</label>
+        <input type="date" name="joining" id="faculty-joining" required>
+        
+        <label>Enter your email id</label>
+        <input type="email" name="email" id="faculty-email" placeholder="Enter your email here" required>
+        
+        <label>Enter your Designation</label>
+        <input type="text" name="desig" id="faculty-designation" placeholder="Enter your designation here.">
+        
+        <input type="submit" value="Submit" id="data-submit" autofocus>
+    </form>
+    <br>
+    <table id="table-data" style="border: 1px solid black;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Date of Joining</th>
+                <th>Email Address</th>
+                <th>Designation</th>           
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+    
+    <script>
+
+        // event "submit" fires on FORMs, when sbumit button of the form clicked, or ENTER key was pressed on any input.
+        $('#data-form').on('submit', addData);
+
+        function addData (event) {
+            var data, dataItem;
+
+            console.log('addData called');
+            event.preventDefault(); // prevents the defaults behviour of submit. a) url query parameters building b) page refresh
+
+            //get input values.
+            data = {
+                name: $('#faculty-name').val(),    
+                age: $('#faculty-age').val(),
+                DOJ: $('#faculty-joining').val(), 
+                email: $('#faculty-email').val(),
+                designation: $('#faculty-designation').val()  
+            };
+            
+            //build a node.
+            dataItem = '<tr>';
+            for (var field in data) {
+                dataItem += '<td>' + data[field]  + '</td>'; // data['name'] // data.name
+            }
+
+            dataItem += '</tr>';
+             
+            $('#table-body').append(dataItem);
+
+            // clear the form
+            //$('#data-form-reset').click();
+            $('#data-form')[0].reset();
+        }
+
+    </script>
+</body>
+</html>

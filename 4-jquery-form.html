@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <!-- HTML5 form validation, required, type, maxlength, minlength, (numbers > max, min) -->
+    <form id="data-form">
+        <input type="text" name="name" id="student-name" placeholder="Enter your name here" autofocus required> 
+        <br><br>
+        <input type="number" name="age" id="student-age" placeholder="Enter your age here" required min="18" max="75">
+        <br><br>
+        <input type="password" name="pin" id="student-pin" placeholder="Enter your pin here" required minlength="3" maxlength="5">
+        <br><br>
+        <input type="email" name="email" id="student-email" placeholder="Enter your email here" required>
+        <br><br>
+        <input type="text" name="designation" id="student-desig" placeholder="Enter your designation here.">
+        <br><br>
+        <!-- <input type="reset" value="Reset" id="data-form-reset"> -->
+        <br>
+        <input type="submit" value="Submit" id="data-submit">
+    </form>
+    <br>
+    <ul id="data-list">
+        <li>lorem</li>
+    </ul>
+    
+    <script>
+
+        // event "submit" fires on FORMs, when sbumit button of the form clicked, or ENTER key was pressed on any input.
+        $('#data-form').on('submit', addData);
+
+        function addData (event) {
+            var data, dataItem;
+
+            console.log('addData called');
+            event.preventDefault(); // prevents the defaults behviour of submit. a) url query parameters building b) page refresh
+
+            //get input values.
+            data = {
+                name: $('#student-name').val(),    
+                age: $('#student-age').val(),
+                pin: $('#student-pin').val(), 
+                email: $('#student-email').val(),
+                designation: $('#student-designation').val()
+            };
+            
+            //build a node.
+            dataItem = '<li>';
+            for (var field in data) {
+                dataItem += field + ' : ' + data[field] + ' | '; // data['name'] // data.name
+            }
+
+            dataItem += '</li>';
+             
+            $('#data-list').append(dataItem);
+
+            // clear the form
+            //$('#data-form-reset').click();
+            $('#data-form')[0].reset();
+        }
+
+    </script>
+</body>
+</html>

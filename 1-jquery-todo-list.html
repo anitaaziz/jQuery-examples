@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery intro</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+
+    <h2>Todos List</h2>
+    <input type="text" name="todo" id="todo-text" placeholder="Enter todo here..." autofocus><br><br>
+    <button id="todo-submit">Add</button>
+
+    <ul id="todo-list">
+        <li>list first item</li>
+        <li>list second item</li>
+    </ul>
+
+    <script>
+        
+        $('#todo-submit').on('click', addItem);
+
+        function addItem(event) {
+        
+            // get input value
+            var todoText = $('#todo-text').val(); // will give the input value.
+
+            // build the li item node
+            var todoItem = '<li>' + todoText + '</li>';
+
+            // append (insert) a new element into the existing element.
+            //$('#todo-list').prepend(todoItem);
+            $('#todo-list').append(todoItem);
+
+            // reset the input field value for new enteries 
+            $('#todo-text').val('');
+
+            // return focus to the input field
+            $('#todo-text').focus();
+        }
+    </script>
+</body>
+</html>
